@@ -1,4 +1,5 @@
 -- Json Assignment --
+-- 5 Students Name, Address, City, DOB, Standard need to be inserted in the student table, need to fetch these result from json variable. and select output in the json format
 
 create table Student
 (

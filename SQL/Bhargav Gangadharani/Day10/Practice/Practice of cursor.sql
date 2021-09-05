@@ -2,22 +2,22 @@
 DECLARE emp CURSOR  
     FOR SELECT * FROM HumanResources.Employee  
 OPEN emp  
-FETCH NEXT FROM emp;  
+FETCH NEXT FROM emp
 Deallocate emp
 
 
 -- Cursor with fetch status
 DECLARE Employee_Cursor CURSOR FOR  
 SELECT BusinessEntityID, JobTitle  
-FROM HumanResources.Employee;  
-OPEN Employee_Cursor;  
-FETCH NEXT FROM Employee_Cursor;  
+FROM HumanResources.Employee
+OPEN Employee_Cursor
+FETCH NEXT FROM Employee_Cursor 
 WHILE @@FETCH_STATUS = 0  
    BEGIN  
-      FETCH NEXT FROM Employee_Cursor;  
+      FETCH NEXT FROM Employee_Cursor
    END;  
-CLOSE Employee_Cursor;  
-DEALLOCATE Employee_Cursor;  
+CLOSE Employee_Cursor
+DEALLOCATE Employee_Cursor
 GO  
 
 --local cursor

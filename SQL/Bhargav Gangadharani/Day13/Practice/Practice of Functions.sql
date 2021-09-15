@@ -1,79 +1,61 @@
 
 
---SCALER FUNCTION
-Create function Gender(@BusinessEntityID int)
-RETURNS varchar(10)
+--Scaler Function 
+Create Function Count_Emp_Jobtitle(@Jobtitle varchar(30))
+Returns int
 As
-BEGIN
-DECLARE @Gender varchar(10);
-Select @Gender=Gender from HumanResources.Employee where BusinessEntityID=@BusinessEntityID
-RETURN @Gender
-END
-GO
+Begin
+Declare @Emp_count int
+Select @Emp_count=Count(JobTitle) from HumanResources.Employee where JobTitle=@Jobtitle
+Return @Emp_count
+End
+Go
 
-SELECT DBO.Gender(150)
+Select DBO.Count_Emp_Jobtitle(150)
 
 
 
-Create function NationalIDNumber(@BusinessEntityID int)
-RETURNS INT
-as
-BEGIN
-DECLARE @NationalIDNumber int;
+Create Function NationalIDNumber(@BusinessEntityID int)
+Returns int
+As
+Begin
+Declare @NationalIDNumber int;
 Select @NationalIDNumber=NationalIDNumber from HumanResources.Employee where BusinessEntityID=@BusinessEntityID
-RETURN @NationalIDNumber
-END
-GO
+Return @NationalIDNumber
+End
+Go
 
-SELECT DBO.NationalIDNumber(150)
+Select DBO.NationalIDNumber(150)
 
 
---TABLE-VALUED FUNCTION
-Create function Details(@BusinessEntityID int)
-RETURNS TABLE
-as
-RETURN
+--TABLE-VALUED Function
+Create Function Details(@BusinessEntityID int)
+Returns TABLE
+As
+Return
 (
 	SELECT * FROM HumanResources.Employee where BusinessEntityID=@BusinessEntityID
 )
-GO
+Go
 
-SELECT * FROM  DBO.DETAILS(150)
+Select * From  DBO.DETAILS(150)
 
 ---Modify/Alter Function
-Alter function Details(@BusinessEntityID int)
-RETURNS TABLE
-as
-RETURN
+Alter Function Details(@BusinessEntityID int)
+Returns TABLE
+As
+Return
 (
-	SELECT e.BusinessEntityID,p.FirstName,p.MiddleName,p.LastName,e.JobTitle,e.HireDate,e.Gender 
+	SELECT e.BusinessEntityID,p.FirstName,p.MiddleName,p.LAstName,e.JobTitle,e.HireDate,e.Gender 
 	FROM HumanResources.Employee e join Person.Person p on e.BusinessEntityID=p.BusinessEntityID 
 	where e.BusinessEntityID=@BusinessEntityID
 )
-GO
+Go
 
-SELECT * FROM  DBO.DETAILS(150)
+Select * From  DBO.DETAILS(150)
 
---DELETE FUNCTION
+--DELETE Function
 IF OBJECT_ID('Details') IS NOT NULL
-	DROP FUNCTION Details
-GO
+	DROP Function Details
+Go
 
-
---EXECUTE FUNCTION
-Create function HireDate(@BusinessEntityID int)
-RETURNS DATE
-AS
-BEGIN
-	DECLARE @HireDate DATE
-	SELECT @HireDate=HireDate FROM HumanResources.Employee where BusinessEntityID=@BusinessEntityID
-RETURN @HireDate
-END
-GO
-
-DECLARE @HireDate DATE
-EXEC @HireDate=DBO.HireDate
-	 @BusinessEntityID=105
-PRINT @HireDate
-
-Select 'Hiredate' =  dbo.HireDate(150)

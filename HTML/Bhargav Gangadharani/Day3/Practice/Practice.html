@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Practice</title>
+    <style>
+       nav> ul{
+            list-style-type: none;
+            text-align: right;
+            
+        }
+        nav >ul li{
+            display: inline;
+            font-size: 25px;
+            padding-left: 5px;
+            background-color: aqua;
+        }
+    </style>
+</head>
+<body>
+  <nav>
+    <ul>
+        <li><a href="#">Home</a></li>
+        <li><a href="#">AboutUs</a></li>
+        <li><a href="#">ContactUs</a></li>
+    </ul>
+</nav>
+    <article style="width: 300px; border: 2px solid gray; padding: 10px; border-radius: 10px; margin:5px;">
+        <img src="Assets/news.png" width="300" height="250"/>
+        <h3> Gujarat CM Bhupendra Patel visits flood-affected areas in Jamnagar</h3>
+        <p>
+            The newly sworn-in chief minister of Gujarat Bhupendra Patel on Tuesday visited some of the flood-affected areas in Jamnagar to take stock of the situation. This comes after he chaired a high-level review meeting on Monday to assess the flood situations in some parts of the Saurashtra region. Besides, he has also been reportedly making an aerial survey of the affected regions. According to reports, Jamnagar and Rajkot districts of Gujarat are worst-hit after heavy rain led to overflowing dams in the state.
+        </p>
+    </article>
+    <h1> Employee Hierarchy</h1>
+    <h2>Company CEO<br>Tony Charles</h2>
+        <ul style="list-style-type: Disc;">
+          <li>Sales manager<br>Steve Heisenberg
+            <ul style="list-style-type: circle;">
+              <li>Representative
+                <ol type="1">
+                  <li>Roger</li>
+                  <li>George</li>
+                </ol>
+              </li>
+            </ul>
+          </li>
+          <li>Project manager<br>John Mathews
+            <ul style="list-style-type: circle;">
+              <li>Team Leader
+                <ol type="1">
+                  <li>Daniel
+                    <ol type="I">
+                      <li>Sr Developer
+                        <ol type="i">
+                          <li>David</li>
+                          <li>Robert</li>
+                          <li>William</li>
+                        </ol>
+                      </li>
+                      <li>Jr Developer
+                        <ol type="i">
+                          <li>Thomas</li>
+                          <li>Christopher</li>
+                          <li>Donald</li>
+                        </ol>
+                      </li>
+                    </ol>
+                  </li>
+                  <li>Steven
+                    <ol type="I">
+                    <li>Sr Developer
+                      <ol type="i">
+                        <li>Andrew</li>
+                        <li>Kenneth</li>
+                        <li>Joshua</li>
+                      </ol>
+                    </li>
+                    <li>Jr Developer
+                      <ol type="i">
+                        <li>Kevin</li>
+                        <li>Jason</li>
+                        <li>Ryan</li>
+                      </ol>
+                    </li>
+                  </ol>
+                </li>
+                  <li>Gary
+                    <ol type="I">
+                      <li>Sr Developer
+                        <ol type="i">
+                          <li>Jeffrey</li>
+                          <li>Jacob</li>
+                          <li>Edward</li>
+                        </ol>
+                      </li>
+                      <li>Jr Developer
+                        <ol type="i">
+                          <li>Nicholas</li>
+                          <li>Justin</li>
+                          <li>Scott</li>
+                        </ol>
+                      </li>
+                    </ol> 
+                  </li>
+                </ol>
+              </li>
+            </ul>
+          </li>
+          <li>Networking manager<br>Joseph Anthony
+            <ul style="list-style-type: circle;">
+              <li>Networking Assistance
+                <ol type="1">
+                  <li>Frank</li>
+                  <li>Alexander</li>
+                  <li>Dennis</li>
+                </ol>
+              </li>
+            </ul>
+          </li>
+        </ul>
+        <h1> Login Form</h1>
+        <form>
+            <label for="usr">Username</label>
+            <input type="text" id="usr" required>
+        
+            <label for="pswd">Password</label>
+            <input type="password" id="pswd" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters" required>
+        
+            <input type="submit" value="Submit">
+             </form>
+</body>
+</html>

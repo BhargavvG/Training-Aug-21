@@ -16,7 +16,7 @@
             </div>
         </form>
         <button class="btn btn-success mt-2" onclick="return check(document.getElementById('date').value)">Submit</button>
-    </div
+    </div>
     
 
     <script>
@@ -47,7 +47,7 @@
                 return;
             }
 
-            else if(isNaN(day) || day < 1 || day > (new Date(year, month, 0).getDate())  || dt > (new Date()))
+            else if(isNaN(day) || day < 1 || day > (new Date(year, month, 0).getDate()) )
             {
                 alert('Invalid Date!');
                 return;

@@ -1,0 +1,12 @@
+[
+    {
+        "Id":1 , 
+        "name":"user1" , 
+        "address":"Ahemdabad"
+    },
+    {
+        "id":2 , 
+        "name":"user2" , 
+        "address":"Rajkot"
+    }
+]

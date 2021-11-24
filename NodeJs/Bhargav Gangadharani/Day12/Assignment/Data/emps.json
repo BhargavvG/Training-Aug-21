@@ -1,0 +1,319 @@
+[
+    {
+        "EmpId": 1,
+        "Address": {
+            "line1": "Ahmedabad",
+            "line2": "Gujrat",
+            "line3": "India"
+        },
+        "Assignments": [
+            {
+                "AssignmentId": 1,
+                "AssignmentName": "NodeJs",
+                "ActionCode": "ABCD",
+                "ActionReasonCode": "DEPLOY",
+                "ActualTerminationDate": "2021/11/22",
+                "AssignmentCategory": "Backend",
+                "assignmentDFF": [
+                    "aa",
+                    "bb",
+                    "cc"
+                ],
+                "assignmentExtraInformation": [
+                    "aa",
+                    "bbbb",
+                    "cccccccc"
+                ],
+                "AssignmentNumber": "6",
+                "AssignmentProjectedEndDate": "2021/11/12",
+                "AssignmentStatus": "In-Progress",
+                "AssignmentStatusTypeId": 2,
+                "BusinessUnitId": 5,
+                "CreationDate": "2021/10/29",
+                "DefaultExpenseAccount": "ACCSBI330215",
+                "DepartmentId": 5,
+                "EffectiveEndDate": "2021/10/29",
+                "EffectiveStartDate": "2021/10/29",
+                "empreps": [
+                    1,
+                    22,
+                    333,
+                    4444,
+                    55555,
+                    666666
+                ],
+                "EndTime": "15:20",
+                "Frequency": "2.5",
+                "FullPartTime": "20hr",
+                "GradeId": 2,
+                "GradeLadderId": 5,
+                "JobId": 100,
+                "LastUpdateDate": "2021/12/31",
+                "LegalEntityId": 3,
+                "Links": [
+                    "www.google.com",
+                    "www.radixweb.com"
+                ],
+                "LocationId": 2021542,
+                "ManagerAssignmentId": 1564585,
+                "ManagerId": 51
+            },
+            {
+                "AssignmentId": 2,
+                "AssignmentName": "Reactjs",
+                "ActionCode": "ABCD",
+                "ActionReasonCode": "DEPLOY",
+                "ActualTerminationDate": "2021/10/29",
+                "AssignmentCategory": "Backend",
+                "assignmentDFF": [
+                    "aa",
+                    "bb",
+                    "cc"
+                ],
+                "assignmentExtraInformation": [
+                    "aa",
+                    "bbbb",
+                    "cccccccc"
+                ],
+                "AssignmentNumber": "6",
+                "AssignmentProjectedEndDate": "2021/10/29",
+                "AssignmentStatus": "In-Progress",
+                "AssignmentStatusTypeId": 2,
+                "BusinessUnitId": 5,
+                "CreationDate": "2021/10/21",
+                "DefaultExpenseAccount": "ACCSBI330215",
+                "DepartmentId": 5,
+                "EffectiveEndDate": "2021/10/29",
+                "EffectiveStartDate": "2021/10/29",
+                "empreps": [
+                    1,
+                    22,
+                    333,
+                    4444,
+                    55555,
+                    666666
+                ],
+                "EndTime": "15:20",
+                "Frequency": "2.5",
+                "FullPartTime": "20hr",
+                "GradeId": 2,
+                "GradeLadderId": 5,
+                "JobId": 100,
+                "LastUpdateDate": "2021/10/29",
+                "LegalEntityId": 3,
+                "Links": [
+                    "www.google.com",
+                    "www.radixweb.com"
+                ],
+                "LocationId": 2021542,
+                "ManagerAssignmentId": 1564585,
+                "ManagerId": 51
+            }
+        ],
+        "CitizenshipID": 2,
+        "CitizenshipLegislationCode": "AAABC",
+        "CitizenshipStatus": "NRI",
+        "CitizenshipToDate": "2021/10/29",
+        "City": "Ahmedabad",
+        "CorrespondenceLanguage": "Gujarati",
+        "Country": "India",
+        "CreationDate": "2021/10/29",
+        "DateOfBirth": "2021/10/29",
+        "directReports": [
+            "Report1",
+            "Report2"
+        ],
+        "DisplayName": "emp",
+        "DriversLicenseExpirationDate": "2021/10/29",
+        "DriversLicenseId": 23125485,
+        "DriversLicenseIssuingCountry": "India",
+        "EffectiveStartDate": "2020/05/21",
+        "Ethnicity": "Indian",
+        "FirstName": "Bhargav",
+        "Gender": "Male",
+        "HireDate": "2021/08/02",
+        "HomeFaxAreaCode": "Lorem",
+        "HomeFaxCountryCode": "IND",
+        "HomeFaxExtension": "IND-Guj-Lorem",
+        "HomeFaxLegislationCode": "Lorem",
+        "HomeFaxNumber": "wndeu337373un",
+        "HomePhoneAreaCode": "csrfsrf",
+        "HomePhoneCountryCode": "lorem",
+        "HomePhoneExtension": "lorem",
+        "HomePhoneLegislationCode": "lorem",
+        "HomePhoneNumber": "lorem",
+        "Honors": "lorem",
+        "LastName": "Gangadharani",
+        "LastUpdateDate": "2021/08/02",
+        "LegalEntityId": 123,
+        "LicenseNumber": "GJBSBD-3151",
+        "links": [
+            "google.com"
+        ],
+        "MaritalStatus": "unmarried",
+        "MiddleName": "P",
+        "MilitaryVetStatus": "UNDEFINED",
+        "NameSuffix": "Mr.",
+        "NationalId": 5,
+        "NationalIdCountry": 8
+    },
+    {
+        "EmpId": 2,
+        "Address": {
+            "line1": "Ahmedabad",
+            "line2": "Gujrat",
+            "line3": "India"
+        },
+        "Assignments": [
+            {
+                "AssignmentId": 1,
+                "AssignmentName": "NodeJs",
+                "ActionCode": "ABCD",
+                "ActionReasonCode": "DEPLOY",
+                "ActualTerminationDate": "2021/08/02",
+                "AssignmentCategory": "Backend",
+                "assignmentDFF": [
+                    "aa",
+                    "bb",
+                    "cc"
+                ],
+                "assignmentExtraInformation": [
+                    "aa",
+                    "bbbb",
+                    "cccccccc"
+                ],
+                "AssignmentNumber": "6",
+                "AssignmentProjectedEndDate": "2021/08/02",
+                "AssignmentStatus": "In-Progress",
+                "AssignmentStatusTypeId": 2,
+                "BusinessUnitId": 5,
+                "CreationDate": "2021/08/02",
+                "DefaultExpenseAccount": "ACCSBI330215",
+                "DepartmentId": 5,
+                "EffectiveEndDate": "2021/08/02",
+                "EffectiveStartDate": "2021/08/02",
+                "empreps": [
+                    1,
+                    22,
+                    333,
+                    4444,
+                    55555,
+                    666666
+                ],
+                "EndTime": "15:20",
+                "Frequency": "2.5",
+                "FullPartTime": "20hr",
+                "GradeId": 2,
+                "GradeLadderId": 5,
+                "JobId": 100,
+                "LastUpdateDate": "2021/08/02",
+                "LegalEntityId": 3,
+                "Links": [
+                    "www.google.com",
+                    "www.radixweb.com"
+                ],
+                "LocationId": 2021542,
+                "ManagerAssignmentId": 1564585,
+                "ManagerId": 51
+            },
+            {
+                "AssignmentId": 4,
+                "AssignmentName": "Reactjs",
+                "ActionCode": "ABCD",
+                "ActionReasonCode": "DEPLOY",
+                "ActualTerminationDate": "2021/08/02",
+                "AssignmentCategory": "Backend",
+                "assignmentDFF": [
+                    "aa",
+                    "bb",
+                    "cc"
+                ],
+                "assignmentExtraInformation": [
+                    "aa",
+                    "bbbb",
+                    "cccccccc"
+                ],
+                "AssignmentNumber": "6",
+                "AssignmentProjectedEndDate": "2021/08/02",
+                "AssignmentStatus": "In-Progress",
+                "AssignmentStatusTypeId": 2,
+                "BusinessUnitId": 5,
+                "CreationDate": "2021/08/02",
+                "DefaultExpenseAccount": "ACCSBI330215",
+                "DepartmentId": 5,
+                "EffectiveEndDate": "2021/08/02",
+                "EffectiveStartDate": "2021/08/01",
+                "empreps": [
+                    1,
+                    22,
+                    333,
+                    4444,
+                    55555,
+                    666666
+                ],
+                "EndTime": "15:20",
+                "Frequency": "2.5",
+                "FullPartTime": "20hr",
+                "GradeId": 2,
+                "GradeLadderId": 5,
+                "JobId": 100,
+                "LastUpdateDate": "2021/12/31",
+                "LegalEntityId": 3,
+                "Links": [
+                    "www.google.com",
+                    "www.radixweb.com"
+                ],
+                "LocationId": 2021542,
+                "ManagerAssignmentId": 1564585,
+                "ManagerId": 51
+            }
+        ],
+        "CitizenshipID": 2,
+        "CitizenshipLegislationCode": "AAABC",
+        "CitizenshipStatus": "NRI",
+        "CitizenshipToDate": "2021/08/02",
+        "City": "Ahmedabad",
+        "CorrespondenceLanguage": "Gujarati",
+        "Country": "India",
+        "CreationDate": "2021/08/02",
+        "DateOfBirth": "2021/08/02",
+        "directReports": [
+            "Report1",
+            "Report2"
+        ],
+        "DisplayName": "emp",
+        "DriversLicenseExpirationDate": "2021/08/02",
+        "DriversLicenseId": 23125485,
+        "DriversLicenseIssuingCountry": "India",
+        "EffectiveStartDate": "2021/08/02",
+        "Ethnicity": "Indian",
+        "FirstName": "FirstName",
+        "Gender": "Male",
+        "HireDate": "2021/08/02",
+        "HomeFaxAreaCode": "Lorem",
+        "HomeFaxCountryCode": "IND",
+        "HomeFaxExtension": "IND-Guj-Lorem",
+        "HomeFaxLegislationCode": "Lorem",
+        "HomeFaxNumber": "wndeu337373un",
+        "HomePhoneAreaCode": "csrfsrf",
+        "HomePhoneCountryCode": "lorem",
+        "HomePhoneExtension": "lorem",
+        "HomePhoneLegislationCode": "lorem",
+        "HomePhoneNumber": "lorem",
+        "Honors": "lorem",
+        "LastName": "LastName",
+        "LastUpdateDate": "2021/08/02",
+        "LegalEntityId": 123,
+        "LicenseNumber": "GJBSBD-3151",
+        "links": [
+            "google.com"
+        ],
+        "MaritalStatus": "unmarried",
+        "MiddleName": "P",
+        "MilitaryVetStatus": "UNDEFINED",
+        "NameSuffix": "Mr.",
+        "NationalId": 5,
+        "NationalIdCountry": 8
+    }
+]
+

@@ -12,8 +12,13 @@ export class Reservation{
         }
 
         // Reservation should be done before 6 hours.
-        // var date = new Date();
-        // if (data.time - date )
+       var diff = (data.time.getTime()- new Date().getTime())/(1000 * 36000 * 12)
+       console.log(diff)
+       console.log(data.time.getTime())
+       console.log(new Date().getTime())
+        if (diff < 6){
+            console.log(diff)
+        }
 
 
         reservations.push(data);

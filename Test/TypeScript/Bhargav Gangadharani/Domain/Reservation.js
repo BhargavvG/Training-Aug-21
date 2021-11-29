@@ -12,6 +12,9 @@ var Reservation = /** @class */ (function () {
             console.log('No Restaurant Found');
             return;
         }
+        // Reservation should be done before 6 hours.
+        // var date = new Date();
+        // if (data.time - date )
         reservation_1.reservations.push(data);
         console.log('Tables Booked Successfully');
     };

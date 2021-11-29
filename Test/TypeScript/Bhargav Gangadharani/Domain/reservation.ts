@@ -11,6 +11,11 @@ export class Reservation{
             return;
         }
 
+        // Reservation should be done before 6 hours.
+        // var date = new Date();
+        // if (data.time - date )
+
+
         reservations.push(data);
         console.log('Tables Booked Successfully')
     }

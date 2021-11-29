@@ -12,17 +12,12 @@ export class Reservation{
         }
 
         // Reservation should be done before 6 hours.
-       var diff = (data.time.getTime()- new Date().getTime())/(1000 * 36000 * 12)
-       console.log(diff)
-       console.log(data.time.getTime())
-       console.log(new Date().getTime())
-        if (diff < 6){
-            console.log(diff)
+       var diffOfHours = (data.time.getTime()- new Date().getTime())/(1000 * 36000 * 12)
+        if (diffOfHours > 6){
+            reservations.push(data);
+            console.log('Tables Booked Successfully')
         }
 
-
-        reservations.push(data);
-        console.log('Tables Booked Successfully')
     }
 
     viewReservations(){

@@ -13,15 +13,11 @@ var Reservation = /** @class */ (function () {
             return;
         }
         // Reservation should be done before 6 hours.
-        var diff = (data.time.getTime() - new Date().getTime()) / (1000 * 36000 * 12);
-        console.log(diff);
-        console.log(data.time.getTime());
-        console.log(new Date().getTime());
-        if (diff < 6) {
-            console.log(diff);
+        var diffOfHours = (data.time.getTime() - new Date().getTime()) / (1000 * 36000 * 12);
+        if (diffOfHours > 6) {
+            reservation_1.reservations.push(data);
+            console.log('Tables Booked Successfully');
         }
-        reservation_1.reservations.push(data);
-        console.log('Tables Booked Successfully');
     };
     Reservation.prototype.viewReservations = function () {
         for (var _i = 0, reservations_1 = reservation_1.reservations; _i < reservations_1.length; _i++) {

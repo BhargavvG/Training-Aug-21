@@ -1,3 +1,8 @@
+// There is a retail shop which need to manage the inventory, 
+// whenever some purchase is being made product quantity should be reduced, 
+// if quanity is less than 5 reorder request should be raised.
+// Design an interface and classes for the same.
+
 interface Inventory{
     ID: number;
     Name:string;

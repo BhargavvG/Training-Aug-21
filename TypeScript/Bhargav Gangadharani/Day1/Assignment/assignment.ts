@@ -1,3 +1,8 @@
+// 1.  Store 5 employees’ data in one array (ID,FirstName,LastName,Address,Salary). 
+// Do the operation searching by indexnumber, EmployeeID, Insert the employee, delete the employee from the Array. 
+// Create one more array emp and join the value with above array. When display list combine firstname and lastname as fullname, 
+// From the address field flatnumber,city,state and should be splited.PF should be computed and total salary should be display.
+
 var employeeData : any =[{ID:1,FirstName:"John",LastName:"Shaw",Address:" 401, Ahmedabad, Gujrat",Salary:40000},
                            {ID:2,FirstName:"Jackson",LastName:"Shah",Address:"402, Rajkot, Gujrat",Salary:45000},
                             {ID:3,FirstName:"Jonny",LastName:"Sharma",Address:"501, Surat, Gujrat",Salary:50000},
@@ -37,6 +42,7 @@ for (var item of employeeData){
     console.log(item);
 }
 console.log("Employee Record");
+
 
 // When display list combine firstname and lastname as fullname, 
 // From the address field flatnumber,city,state and should be splited.

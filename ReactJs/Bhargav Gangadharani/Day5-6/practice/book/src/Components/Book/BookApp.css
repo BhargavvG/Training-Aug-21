@@ -1,0 +1,8 @@
+.book {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  grid-gap: 1rem;
+  margin: 2rem 0;
+  /* float: left;
+  border: 2px solid black; */
+}

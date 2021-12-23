@@ -11,12 +11,15 @@ const client = axios.create({
 });
 
 export default function App() {
+  const [refreshing, refresh ] = useState(false);
+
   useEffect(() => {
     client.get("/").then((response) => {
       console.log(response.data);
       setStudents(response.data);
     });
-  }, []);
+  }, [refreshing]);
+
 
   const [student, setStudent] = useState({
     id: "",
@@ -62,7 +65,7 @@ export default function App() {
     } else {
       studReq.addStudent(student);
     }
-    setStudents([...students, { ...student }]);
+  
     setStudent({
       id: "",
       firstName: "",
@@ -77,6 +80,7 @@ export default function App() {
     });
     setDetails(false);
     setisEditted(false);
+    refresh(!refreshing);
   };
 
   const handleChange = (event) => {
@@ -93,16 +97,12 @@ export default function App() {
     });
   };
   const deleteStudent = (id) => {
-    const sortedStudents = students.filter((s) => s.id !== id);
-    setStudents(sortedStudents);
     studReq.deleteStudent(id);
+    refresh(!refreshing);
   };
 
   const editStudent = (id) => {
-    const filteredStudents = students.filter((s) => s.id !== id);
     const selectedStudent = students.find((s) => s.id === id);
-
-    setStudents(filteredStudents);
     setStudent(selectedStudent);
     setisEditted(true);
   };

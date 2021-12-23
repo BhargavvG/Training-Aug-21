@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import "./App.css";
 import StudentForm from "./components/StudentForm";
 import StudentList from "./components/StudentList";
-import StudentData from "./context";
+import StudentData from "./serverRequests";
 import axios from "axios";
 const studReq = new StudentData();
 

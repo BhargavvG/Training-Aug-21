@@ -144,12 +144,7 @@ export default class StudentForm extends Component {
                   <div className="col-md-3"></div>
                   <div className="col-md-9 ">
                     <div className="form-student-image mx-auto rounded-circle">
-                      <img
-                        className="rounded-circle"
-                        width="175"
-                        src={image}
-                        alt="student"
-                      />
+                      <img width="175" src={image} alt="student" />
                     </div>
                   </div>
                 </div>

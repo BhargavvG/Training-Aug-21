@@ -43,15 +43,6 @@ class ProductDomain {
               },
               { $unwind: "$brand" },
               {
-                $lookup: {
-                  from: "brands",
-                  localField: "brand",
-                  foreignField: "brandId",
-                  as: "brand",
-                },
-              },
-              { $unwind: "$brand" },
-              {
                 $project: {
                   "category._id": false,
                   "category.details": false,
@@ -139,7 +130,7 @@ class ProductDomain {
     async getProductById(req, res){
         try {
             const product = await ProductModel.aggregate([
-                {$match : {activeStatus: true, productId: req.params.productId}},
+                {$match : {activeStatus: true, productId: parseInt(req.params.productId)}},
                 {$lookup: {from : 'categories', localField : 'category', foreignField : 'categoryId', as: 'category'}},
                 {$unwind: "$category"},
                 {$lookup: {from : 'subcategories', localField : 'subCategory', foreignField : 'subCategoryId', as: 'subCategory'}},

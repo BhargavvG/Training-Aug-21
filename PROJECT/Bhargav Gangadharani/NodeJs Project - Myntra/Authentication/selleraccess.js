@@ -3,7 +3,6 @@ const router = express.Router();
 
 router.use((req, res, next) => {
     if(req.decoded.role === 'seller') {
-        console.log(req.decoded)
         next();
     }
     else{

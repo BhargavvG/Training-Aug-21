@@ -1,0 +1,96 @@
+Definition :
+ This project is aimed to create api and database for the myntra website.
+ So basically I have created logics for giving features to work with database with authentication 
+ and interact user, admin and seller fruitfully.
+
+
+Features:
+-> login/Signup page:
+        Signup,
+        Login,
+        Forgot Password,
+        Reset Password,
+        Update Password,
+        Show Profile,
+        Update Profile
+
+
+-> User's Features:
+        View Elements, // Home page
+        Filter Elements,
+        View Categories,
+        View Brands,
+        View Offers,
+        View Products,
+        Filter Products by category, brand, offer,
+        Search Product by name,
+        Add & Remove Products from Cart,
+        View Cart,
+        Clear Cart,
+        Place Order,
+        View Orders,
+        Cancel Orders.
+
+
+-> Seller's Features:
+        Add Product,
+        Update Product,
+        Remove And Restore Product,
+        Get Orders.
+
+
+-> Admin's Features:
+        Add, Update & Remove  Offers,
+        Add, Update & Remove Brands,
+        Add, Update & Remove Categories,
+        Add, Update & Remove Home Page Elements,
+        Get all Users
+
+
+Functionality : 
+
+1 - Signup/Login :
+        User can signup by providing some basic details and login by username and password.
+
+2 - Forgot Password : 
+        If any user don't remember their password then they can reset it by providing email linked with acc,
+        A mail will be sent to that email address which consist OTP for password resetting,
+        Then user will enter OTP for password reset. And new password for further use.
+
+3- Update Password : 
+        In this case after login user can change password by providing old password and new password.
+
+4- View and Update Profile : 
+        User can view and modify his details.
+
+5- Home Page :
+        Home Page consists of elements, that is of Banner, Sliders, Sections of card images i.e categories,
+        Anyone can view home page.
+
+6- Filter in home page: 
+        One can filter home page elements by offers, element type in query parameters.
+
+7- View Categories, Brands, Offers:
+        Anyone can view Categories , offers, brands that is currently available on site.
+
+8- Products: 
+        Only sellers can post their products to sell on site, and they can modify their product's details.
+
+9- Product Page: 
+        Users can view Products, 
+        filter products by offer, category, brand, 
+        Search products by product name, (from search bar)
+
+10- Cart : 
+        User can add products to their cart, view cart, remove product from cart, clear cart.
+        And also place order for all items in cart.
+
+11- Order: 
+        After placing order, user can view their orders and can cancel that order.
+
+12- Receive  Order: 
+        If any user places order than, Seller of that corresponding product can view that order in his received orders.
+
+13- Admin :
+        Admin can add Categories, Home Page Elements, Brands, Offers, 
+        Also they can modify them and also remove them.

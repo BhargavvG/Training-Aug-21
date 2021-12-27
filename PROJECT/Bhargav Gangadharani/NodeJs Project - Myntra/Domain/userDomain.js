@@ -264,7 +264,7 @@ class UserDomain {
       from: cred.user,
       to: req.body.email,
       subject: "OTP for Resetting Password",
-      text: `Greetings!...... OTP for Resetting Password of your Myntra Acc is ${otp}, Note : This is just a testing email !`,
+      text: `Greetings!...... OTP for Resetting Password of your Myntra Acc is ${otp}, Otp is valid for 5 minutes.   Note : This is just a testing email !`,
     };
 
     transporter.sendMail(mailDetails, (err, info) => {

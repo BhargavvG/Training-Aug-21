@@ -14,9 +14,11 @@ router
 .get('/profile', user.getUserProfile)
 .put('/profile/update', user.updateUser )
 .put('/profile/updatepassword', user.updatePassword)
-.get('/profile/all', authadmin, user.getAllUsers)
-.get('/profile/:email', authadmin, user.getuserByEmail)
-.delete('/profile/:userName', authadmin, user.deleteUser)
+.use(authadmin)
+.get('/profile/all',  user.getAllUsers)
+.get('/profile/:email',  user.getuserByEmail)
+.delete('/profile/:userName', user.deleteUser)
+
 
 
 

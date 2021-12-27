@@ -1,9 +1,9 @@
 const mongoose = require("mongoose");
 const Joi = require("joi");
-const database = 'mongodb://localhost/Myntra';
 const autoIncrement = require('mongoose-auto-increment');
+require('dotenv').config();
 
-mongoose.connect(database, {
+mongoose.connect(process.env.DB, {    
     useNewUrlParser: true,
     useUnifiedTopology: true
 }).then(() => {
@@ -36,7 +36,6 @@ const ElementModel = mongoose.model(
         },
         titleImg:{
             type: String,
-            required: true,
         },
         content: [
             {

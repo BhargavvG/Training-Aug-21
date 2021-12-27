@@ -1,24 +1,34 @@
-const express = require('express');
+const express = require("express");
 const app = express();
-const userRouter = require('./Controller/user')
-const homeRouter= require('./Controller/homepage')
-const adminRouter = require('./Controller/adminpanel')
-const sellerRouter = require('./Controller/sellerpage')
-const authlogin = require('./Authentication/loginVerification');
-const authadmin = require('./Authentication/adminaccess');
-const authseller = require('./Authentication/selleraccess')
+const dotenv = require("dotenv");
+const userRouter = require("./Controller/user");
+const brandRouter = require("./Controller/brand");
+const categoryRouter = require("./Controller/category");
+const subCategoryRouter = require("./Controller/subCategory");
+const elementRouter = require("./Controller/element");
+const offerRouter = require("./Controller/offer");
+const productRouter = require("./Controller/product");
+const cartRouter = require("./Controller/cart");
+const orderRouter = require("./Controller/order");
+const authlogin = require("./Authentication/loginVerification");
 
-app.get('/' , (req , res)=>{
-    res.send('Server is live !');
+app.get("/", (req, res) => {
+  res.send("Server is live !");
 });
-app.use(express.json())
-app.use('/myntra', homeRouter); // Home page for users.
-app.use('/user', userRouter); // User login and profile page.
+app.use(express.json());
+app.use("/user", userRouter);
+app.use("/brand", brandRouter);
+app.use("/category", categoryRouter);
+app.use("/subCategory", subCategoryRouter);
+app.use("/element", elementRouter);
+app.use("/offer", offerRouter);
+app.use("/product", productRouter);
 app.use(authlogin);
-app.use('/admin', authadmin ,  adminRouter); // Admin Page.
-app.use('/seller', authseller , sellerRouter); // Seller Page.
+app.use("/cart", cartRouter);
+app.use("/order", orderRouter);
 
-
-app.listen(3000 , ()=>{
-    console.log('server is runing on port 3000 ...');
-}) 
+dotenv.config();
+const port = process.env.PORT;
+app.listen(port, () => {
+  console.log(`server is runing on port ${port} ...`);
+});

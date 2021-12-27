@@ -1,8 +1,8 @@
 const mongoose = require("mongoose");
 const Joi = require("joi");
-const database = 'mongodb://localhost/Myntra';
+require('dotenv').config();
 
-mongoose.connect(database, {
+mongoose.connect(process.env.DB, {
     useNewUrlParser: true,
     useUnifiedTopology: true
 }).then(() => {

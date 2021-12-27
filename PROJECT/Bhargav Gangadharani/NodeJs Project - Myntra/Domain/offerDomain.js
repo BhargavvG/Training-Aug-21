@@ -1,4 +1,4 @@
-const {OfferModel} = require('../Model/otherModel');
+const OfferModel = require('../Model/offerModel');
 
 class OfferDomain { 
     async getAllOffers(req, res){

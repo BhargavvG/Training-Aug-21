@@ -1,4 +1,4 @@
-const {CategoryModel} = require('../Model/otherModel');
+const CategoryModel = require('../Model/categoryModel');
 
 class CategoryDomain { 
     async getAllCategories(req, res){

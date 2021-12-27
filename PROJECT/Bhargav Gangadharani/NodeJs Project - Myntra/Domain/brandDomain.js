@@ -1,4 +1,4 @@
-const {BrandModel} = require('../Model/otherModel');
+const BrandModel = require('../Model/brandModel');
 
 class BrandDomain { 
     async getAllBrands(req, res){

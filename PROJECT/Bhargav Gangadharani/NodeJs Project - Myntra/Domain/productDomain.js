@@ -5,20 +5,102 @@ class ProductDomain {
         try {
             // const products = await ProductModel.find({activeStatus: true});
             const products = await ProductModel.aggregate([
-                {$match : {activeStatus: true}},
+              { $match: { activeStatus: true } },
+              {
+                $lookup: {
+                  from: "categories",
+                  localField: "category",
+                  foreignField: "categoryId",
+                  as: "category",
+                },
+              },
+              { $unwind: "$category" },
+              {
+                $lookup: {
+                  from: "subcategories",
+                  localField: "subCategory",
+                  foreignField: "subCategoryId",
+                  as: "subCategory",
+                },
+              },
+              { $unwind: "$subCategory" },
+              {
+                $lookup: {
+                  from: "offers",
+                  localField: "offer",
+                  foreignField: "offerId",
+                  as: "offer",
+                },
+              },
+              { $unwind: "$offer" },
+              {
+                $lookup: {
+                  from: "brands",
+                  localField: "brand",
+                  foreignField: "brandId",
+                  as: "brand",
+                },
+              },
+              { $unwind: "$brand" },
+              {
+                $lookup: {
+                  from: "brands",
+                  localField: "brand",
+                  foreignField: "brandId",
+                  as: "brand",
+                },
+              },
+              { $unwind: "$brand" },
+              {
+                $project: {
+                  "category._id": false,
+                  "category.details": false,
+                  "category.__v": false,
+                  "category.activeStatus": false,
+                  "subCategory._id": false,
+                  "subCategory.__v": false,
+                  "subCategory.activeStatus": false,
+                  "offer._id": false,
+                  "offer.details": false,
+                  "offer.__v": false,
+                  "offer.activeStatus": false,
+                  "brand._id": false,
+                  "brand.details": false,
+                  "brand.__v": false,
+                  "brand.activeStatus": false,
+                },
+              },
+            ]);
+            res.send(products);
+        }catch (err) {
+            res.status(500).send(err.message);
+        }
+    }
+    
+    async  search(req, res) {
+        try{
+            let expr = req.params.data.replace(/ /g, '.*|.*')
+            expr = `.*${expr}.*`
+            const products = await ProductModel.aggregate([
+                {$match : {productName : {$regex : expr, $options:'i'},activeStatus: true }},
                 {$lookup: {from : 'categories', localField : 'category', foreignField : 'categoryId', as: 'category'}},
                 {$unwind: "$category"},
+                {$lookup: {from : 'subcategories', localField : 'subCategory', foreignField : 'subCategoryId', as: 'subCategory'}},
+                {$unwind: "$subCategory"},
                 {$lookup: {from : 'offers', localField : 'offer', foreignField : 'offerId', as: 'offer'}},
                 {$unwind: "$offer"},
                 {$lookup: {from : 'brands', localField : 'brand', foreignField : 'brandId', as: 'brand'}},
                 {$unwind: "$brand"},
                 {$project: {
                     'category._id': false,'category.details': false , 'category.__v' : false, 'category.activeStatus': false,
+                    "subCategory._id": false, "subCategory.__v": false, "subCategory.activeStatus": false,
                     'offer._id': false,'offer.details': false , 'offer.__v' : false, 'offer.activeStatus': false,
                     'brand._id': false,'brand.details': false , 'brand.__v' : false, 'brand.activeStatus': false
                 }}
             ]);
-            res.send(products);
+            // .find({productName : {$regex : expr, $options:'i'}})
+            res.send(products)
+            
         }catch (err) {
             res.status(500).send(err.message);
         }
@@ -27,6 +109,7 @@ class ProductDomain {
     async searchBy(req, res){
         let data= {activeStatus:true};
         if(req.query.category)  data.category = parseInt(req.query.category);
+        if(req.query.subCategory)  data.subCategory = parseInt(req.query.subCategory);
         if(req.query.brand)  data.brand = parseInt(req.query.brand);
         if(req.query.offer)  data.offer = parseInt(req.query.offer);
         try {
@@ -34,12 +117,15 @@ class ProductDomain {
                 {$match : data},
                 {$lookup: {from : 'categories', localField : 'category', foreignField : 'categoryId', as: 'category'}},
                 {$unwind: "$category"},
+                {$lookup: {from : 'subcategories', localField : 'subCategory', foreignField : 'subCategoryId', as: 'subCategory'}},
+                {$unwind: "$subCategory"},
                 {$lookup: {from : 'offers', localField : 'offer', foreignField : 'offerId', as: 'offer'}},
                 {$unwind: "$offer"},
                 {$lookup: {from : 'brands', localField : 'brand', foreignField : 'brandId', as: 'brand'}},
                 {$unwind: "$brand"},
                 {$project: {
                     'category._id': false,'category.details': false , 'category.__v' : false, 'category.activeStatus': false,
+                    "subCategory._id": false, "subCategory.__v": false, "subCategory.activeStatus": false,
                     'offer._id': false,'offer.details': false , 'offer.__v' : false, 'offer.activeStatus': false,
                     'brand._id': false,'brand.details': false , 'brand.__v' : false, 'brand.activeStatus': false
                 }}
@@ -56,12 +142,15 @@ class ProductDomain {
                 {$match : {activeStatus: true, productId: req.params.productId}},
                 {$lookup: {from : 'categories', localField : 'category', foreignField : 'categoryId', as: 'category'}},
                 {$unwind: "$category"},
+                {$lookup: {from : 'subcategories', localField : 'subCategory', foreignField : 'subCategoryId', as: 'subCategory'}},
+                {$unwind: "$subCategory"},
                 {$lookup: {from : 'offers', localField : 'offer', foreignField : 'offerId', as: 'offer'}},
                 {$unwind: "$offer"},
                 {$lookup: {from : 'brands', localField : 'brand', foreignField : 'brandId', as: 'brand'}},
                 {$unwind: "$brand"},
                 {$project: {
                     'category._id': false,'category.details': false , 'category.__v' : false, 'category.activeStatus': false,
+                    "subCategory._id": false, "subCategory.__v": false, "subCategory.activeStatus": false,
                     'offer._id': false,'offer.details': false , 'offer.__v' : false, 'offer.activeStatus': false,
                     'brand._id': false,'brand.details': false , 'brand.__v' : false, 'brand.activeStatus': false
                 }}
@@ -79,12 +168,15 @@ class ProductDomain {
                 {$match : {activeStatus: true, seller : req.decoded.userName}},
                 {$lookup: {from : 'categories', localField : 'category', foreignField : 'categoryId', as: 'category'}},
                 {$unwind: "$category"},
+                {$lookup: {from : 'subcategories', localField : 'subCategory', foreignField : 'subCategoryId', as: 'subCategory'}},
+                {$unwind: "$subCategory"},
                 {$lookup: {from : 'offers', localField : 'offer', foreignField : 'offerId', as: 'offer'}},
                 {$unwind: "$offer"},
                 {$lookup: {from : 'brands', localField : 'brand', foreignField : 'brandId', as: 'brand'}},
                 {$unwind: "$brand"},
                 {$project: {
                     'category._id': false,'category.details': false , 'category.__v' : false, 'category.activeStatus': false,
+                    "subCategory._id": false, "subCategory.__v": false, "subCategory.activeStatus": false,
                     'offer._id': false,'offer.details': false , 'offer.__v' : false, 'offer.activeStatus': false,
                     'brand._id': false,'brand.details': false , 'brand.__v' : false, 'brand.activeStatus': false
                 }}
@@ -95,31 +187,12 @@ class ProductDomain {
         }
     }
 
-    async getmyProductById(req, res){
-        try {
-            const product = await ProductModel.aggregate([
-                {$match : {activeStatus: true, productId: req.params.productId, seller: req.decoded.userName}},
-                {$lookup: {from : 'categories', localField : 'category', foreignField : 'categoryId', as: 'category'}},
-                {$unwind: "$category"},
-                {$lookup: {from : 'offers', localField : 'offer', foreignField : 'offerId', as: 'offer'}},
-                {$unwind: "$offer"},
-                {$lookup: {from : 'brands', localField : 'brand', foreignField : 'brandId', as: 'brand'}},
-                {$unwind: "$brand"},
-                {$project: {
-                    'category._id': false,'category.details': false , 'category.__v' : false, 'category.activeStatus': false,
-                    'offer._id': false,'offer.details': false , 'offer.__v' : false, 'offer.activeStatus': false,
-                    'brand._id': false,'brand.details': false , 'brand.__v' : false, 'brand.activeStatus': false
-                }}
-            ]);
-            res.send(product);
-        }catch (err) {
-            res.status(500).send(err.message);
-        }
-    }
+
 
     async addProduct(req, res){
         try {
             let productdata = req.body;
+            productdata.seller = req.decoded.userName;
             const product = new ProductModel(productdata);
       
             await product.save();
@@ -138,6 +211,7 @@ class ProductDomain {
                 {productId : productId, seller: req.decoded.userName}, 
                 {$set : {
                    category : req.body.category,
+                   subCategory: req.body.subCategory,
                    details : req.body.details,
                    offer : req.body.offer,
                    brand : req.body.brand,
@@ -195,9 +269,7 @@ class ProductDomain {
             res.status(500).send(err.message);
         }
     }
-
-   
-
 }
+
 
 module.exports = ProductDomain;

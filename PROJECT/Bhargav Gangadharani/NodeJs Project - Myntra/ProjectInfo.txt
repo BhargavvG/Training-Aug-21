@@ -21,8 +21,8 @@ Features:
         View Categories,
         View Brands,
         View Offers,
-        View Products,
-        Filter Products by category, brand, offer,
+        View Products with pagination.
+        Filter Products by category, brand, offer, subCategory, price
         Search Product by name,
         Add & Remove Products from Cart,
         View Cart,

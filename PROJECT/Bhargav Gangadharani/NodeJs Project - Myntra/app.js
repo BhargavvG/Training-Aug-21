@@ -1,5 +1,6 @@
 const express = require("express");
 const app = express();
+const cors = require('cors')
 const dotenv = require("dotenv");
 const userRouter = require("./Controller/user");
 const brandRouter = require("./Controller/brand");
@@ -12,6 +13,7 @@ const cartRouter = require("./Controller/cart");
 const orderRouter = require("./Controller/order");
 const authlogin = require("./Authentication/loginVerification");
 
+app.use(cors());
 app.get("/", (req, res) => {
   res.send("Server is live !");
 });

@@ -156,6 +156,7 @@ class CartDomain {
       const cart = await CartModel.findOne({ userName: req.decoded.userName });
       const cartItems = [];
       if (cart.items.length > 0) {
+        let totalPrice = 0;
         for (let i in cart.items) {
           let product = await ProductModel.findOne({
             productId: cart.items[i].productId,
@@ -166,11 +167,12 @@ class CartDomain {
             price: product.offeredPrice * cart.items[i].quantity,
             seller: product.seller,
           };
+          totalPrice += product.offeredPrice * cart.items[i].quantity
         }
         const orderdata = {
           userName: cart.userName,
           items: cartItems,
-          totalPrice: cart.totalPrice,
+          totalPrice: totalPrice,
         };
 
         const order = new OrderModel(orderdata);

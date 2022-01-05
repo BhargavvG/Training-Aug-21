@@ -38,6 +38,7 @@ const UserModel = mongoose.model(
       type: String,
       required: true,
       uppercase: true,
+      enum: ['MALE', 'FEMALE', 'OTHERS']
     },
     password: {
       type: String,

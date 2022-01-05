@@ -222,7 +222,6 @@ class ProductDomain {
                    brand : req.body.brand,
                    actualPrice : req.body.actualPrice,
                    offeredPrice : req.body.offeredPrice,
-                   seller : req.body.seller,
                    stock : req.body.stock
                     }
                 });

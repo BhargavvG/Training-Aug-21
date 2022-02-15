@@ -17,17 +17,22 @@ class CartDomain {
           },
         },
         {
+          $lookup: {
+            from: "brands",
+            localField: "productDetails.brand",
+            foreignField: "brandId",
+            as: "brands",
+          },
+        },
+        {
           $project: {
             "productDetails._id": false,
             "productDetails.__v": false,
             "productDetails.offer": false,
             "productDetails.category": false,
-            "productDetails.seller": false,
-            "productDetails.stock": false,
           },
         },
       ]);
-      // .find({userName: req.decoded.userName});
       res.send(cart);
     } catch (err) {
       res.status(500).send(err.message);
@@ -111,21 +116,32 @@ class CartDomain {
 
   async updateCart(req, res) {
     try {
-      const result = await CartModel.updateOne(
-        { userName: req.decoded.userName },
-        {
-          $set: {
-            items: req.body.items,
-            totalPrice: req.body.totalPrice,
-          },
-        }
-      );
-      if (result.modifiedCount == 0) {
-        res.send("Cart not found");
-      } else {
+      const avail = CartModel.findOne({
+        userName: req.decoded.userName,
+      });
+      if (avail) {
+        const result = await CartModel.updateOne(
+          { userName: req.decoded.userName },
+          {
+            $set: {
+              items: req.body.items,
+              totalPrice: req.body.totalPrice,
+            },
+          }
+        );
         res.send("Cart updated successfully");
+      } else {
+        let cartdata = {
+          userName: req.decoded.userName,
+          items: req.body.items,
+          totalPrice: req.body.totalPrice,
+        };
+        const cart = new CartModel(cartdata);
+
+        await cart.save();
       }
     } catch (err) {
+      // console.log(err);
       res.status(500).send(err.message);
     }
   }
@@ -155,47 +171,58 @@ class CartDomain {
     try {
       const cart = await CartModel.findOne({ userName: req.decoded.userName });
       const cartItems = [];
+      let status = false;
       if (cart.items.length > 0) {
         let totalPrice = 0;
         for (let i in cart.items) {
           let product = await ProductModel.findOne({
             productId: cart.items[i].productId,
           });
+          let size = product.sizes.find((s) => s.size == cart.items[i].size);
+          if (size.stock < cart.items[i].quantity) status = false;
+          else status = true;
           cartItems[i] = {
             productId: cart.items[i].productId,
             quantity: cart.items[i].quantity,
+            size: cart.items[i].size,
             price: product.offeredPrice * cart.items[i].quantity,
             seller: product.seller,
           };
-          totalPrice += product.offeredPrice * cart.items[i].quantity
+          totalPrice += product.offeredPrice * cart.items[i].quantity;
         }
-        const orderdata = {
-          userName: cart.userName,
-          items: cartItems,
-          totalPrice: totalPrice,
-        };
+        if (status) {
+          const orderdata = {
+            userName: cart.userName,
+            items: cartItems,
+            totalPrice: totalPrice,
+            address: req.body.address,
+            paymentStatus: req.body.paymentStatus,
+            paymentMode: req.body.paymentMode,
+          };
 
-        const order = new OrderModel(orderdata);
-        const orderdetails = await order.save();
-        const result = await CartModel.updateOne(
-          { userName: req.decoded.userName },
-          {
-            $set: {
-              items: [],
-              totalPrice: 0,
-            },
-          }
-        );
-        if (result.modifiedCount == 0) {
-          res.send("Cart not found");
-        } else {
+          const order = new OrderModel(orderdata);
+          const orderdetails = await order.save();
+          const result = await CartModel.updateOne(
+            { userName: req.decoded.userName },
+            {
+              $set: {
+                items: [],
+                totalPrice: 0,
+              },
+            }
+          );
+          // console.log(result);
+
           sendOrder(orderdetails);
-          res.send("Order Placed Successfully");
+          res.send({ id: orderdetails.orderId });
+        } else {
+          res.status(210).send("Stock error");
         }
       } else {
-        res.send("Cart is Empty");
+        res.status(205).send("Cart is Empty");
       }
     } catch (err) {
+      console.log(err);
       res.status(500).send(err.message);
     }
   }
@@ -208,9 +235,11 @@ async function sendOrder(order) {
       orderedBy: orderBy,
       productId: item.productId,
       quantity: item.quantity,
+      size: item.size,
       price: item.price,
       orderDate: order.orderDate,
       refOrderId: order.orderId,
+      address: order.address,
     };
     let product = await ProductModel.findOne({ productId: item.productId });
     data.seller = product.seller;
@@ -225,8 +254,79 @@ async function sendOrder(order) {
       );
     }
     storedata();
-    stock();
+    // stock();
   }
 }
+
+// async function getProductDetails(productId) {
+//   try {
+//     const product = await ProductModel.aggregate([
+//       {
+//         $match: {
+//           activeStatus: true,
+//           productId: parseInt(productId),
+//         },
+//       },
+//       {
+//         $lookup: {
+//           from: "categories",
+//           localField: "category",
+//           foreignField: "categoryId",
+//           as: "category",
+//         },
+//       },
+//       { $unwind: "$category" },
+//       {
+//         $lookup: {
+//           from: "subcategories",
+//           localField: "subCategory",
+//           foreignField: "subCategoryId",
+//           as: "subCategory",
+//         },
+//       },
+//       { $unwind: "$subCategory" },
+//       {
+//         $lookup: {
+//           from: "offers",
+//           localField: "offer",
+//           foreignField: "offerId",
+//           as: "offer",
+//         },
+//       },
+//       { $unwind: "$offer" },
+//       {
+//         $lookup: {
+//           from: "brands",
+//           localField: "brand",
+//           foreignField: "brandId",
+//           as: "brand",
+//         },
+//       },
+//       { $unwind: "$brand" },
+//       {
+//         $project: {
+//           "category._id": false,
+//           "category.details": false,
+//           "category.__v": false,
+//           "category.activeStatus": false,
+//           "subCategory._id": false,
+//           "subCategory.__v": false,
+//           "subCategory.activeStatus": false,
+//           "offer._id": false,
+//           "offer.details": false,
+//           "offer.__v": false,
+//           "offer.activeStatus": false,
+//           "brand._id": false,
+//           "brand.details": false,
+//           "brand.__v": false,
+//           "brand.activeStatus": false,
+//         },
+//       },
+//     ]);
+//     return product[0];
+//   } catch (err) {
+//     return err.message;
+//   }
+// }
 
 module.exports = CartDomain;

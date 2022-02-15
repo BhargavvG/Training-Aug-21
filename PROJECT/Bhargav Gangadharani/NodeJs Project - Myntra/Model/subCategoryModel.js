@@ -1,15 +1,5 @@
 const mongoose = require("mongoose");
 const autoIncrement = require("mongoose-auto-increment");
-require("dotenv").config();
-
-mongoose
-  .connect(process.env.DB, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-  })
-  .then(() => {
-    // console.log("MongoDB Connected...");
-  });
 
 autoIncrement.initialize(mongoose.connection);
 

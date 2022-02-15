@@ -1,13 +1,5 @@
 const mongoose = require("mongoose");
 const Joi = require("joi");
-require('dotenv').config();
-
-mongoose.connect(process.env.DB, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true
-}).then(() => {
-    console.log("MongoDB Connected...");
-});
 
 // model
 const UserModel = mongoose.model(
@@ -17,12 +9,17 @@ const UserModel = mongoose.model(
       type: String,
       required: true,
       unique: true,
-      trim: true
+      trim: true,
+    },
+    displayName: {
+      type: String,
+      required: true,
+      trim: true,
     },
     email: {
       type: String,
       required: true,
-      match: /^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+$/
+      match: /^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+$/,
     },
     contactNumber: {
       type: Number,
@@ -32,57 +29,65 @@ const UserModel = mongoose.model(
     },
     dob: {
       type: Date,
-      required: true,
     },
     gender: {
       type: String,
       required: true,
       uppercase: true,
-      enum: ['MALE', 'FEMALE', 'OTHERS']
+      enum: ["MALE", "FEMALE", "OTHERS"],
     },
     password: {
       type: String,
       required: true,
       maxlength: 1024,
     },
-    role : {
-        type : String,
-        required: true,
-        enum: ['admin', 'user', 'seller']
-    },
-    address: {
-      type: new mongoose.Schema({
-        addressLine1: {
-          type: String,
-          required: true,
-        },
-        addressLine2: {
-          type: String,
-        },
-        pincode: {
-          type: Number,
-          required: true,
-          match: /^[1-9]{1}[0-9]{2}\\s{0, 1}[0-9]{3}$/
-        },
-        city: {
-          type: String,
-          required: true,
-        },
-        state: {
-          type: String,
-          required: true,
-        },
-        country: {
-          type: String,
-          required: true,
-        },
-      }),
+    role: {
+      type: String,
       required: true,
+      enum: ["admin", "user", "seller"],
     },
+    addresses: [
+      {
+        type: new mongoose.Schema({
+          name: {
+            type: String,
+            required: true,
+          },
+          phone: {
+            type: Number,
+            required: true,
+            min: 0000000001,
+            max: 9999999999,
+          },
+          address: {
+            type: String,
+            required: true,
+          },
+
+          pincode: {
+            type: Number,
+            required: true,
+            match: /^[1-9]{1}[0-9]{2}\\s{0, 1}[0-9]{3}$/,
+          },
+          town: {
+            type: String,
+            required: true,
+          },
+          city: {
+            type: String,
+            required: true,
+          },
+          state: {
+            type: String,
+            required: true,
+          },
+        }),
+      },
+    ],
     activeStatus: {
       type: Boolean,
       default: true,
-  }
+    },
   })
 );
 
@@ -90,11 +95,12 @@ const UserModel = mongoose.model(
 function validateUser(user) {
   const schema = Joi.object({
     userName: Joi.string().required(),
+    displayName: Joi.string().required(),
     email: Joi.string()
       .regex(new RegExp("^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+$"))
       .required(),
-    contactNumber: Joi.string().min(10).required(),
-    dob: Joi.date().required(),
+    contactNumber: Joi.number().min(10).required(),
+    dob: Joi.date(),
     gender: Joi.string().required(),
     password: Joi.string()
       .regex(
@@ -104,23 +110,13 @@ function validateUser(user) {
       )
       .required(),
     role: Joi.string().required(),
-    address: Joi.object()
-      .keys({
-        addressLine1: Joi.string().required(),
-        addressLine2: Joi.string(),
-        pincode: Joi.string().required(),
-        city: Joi.string().required(),
-        state: Joi.string().required(),
-        country: Joi.string().required(),
-      })
-      .required(),
   });
 
   return schema.validate(user);
 }
 
-async function createIndexes(){
-    await UserModel.createIndexes({'userName': 1 }, {'role': 1})
+async function createIndexes() {
+  await UserModel.createIndexes({ userName: 1 }, { role: 1 });
 }
 // createIndexes;
 

@@ -1,48 +1,52 @@
 const mongoose = require("mongoose");
-const autoIncrement = require('mongoose-auto-increment');
-require('dotenv').config();
-
-mongoose.connect(process.env.DB, { 
-    useNewUrlParser: true,
-    useUnifiedTopology: true
-}).then(() => {
-    // console.log("MongoDB Connected...");
-});
+const autoIncrement = require("mongoose-auto-increment");
 
 autoIncrement.initialize(mongoose.connection);
 
 // model
 const CartModel = mongoose.model(
-    "carts",
-    new mongoose.Schema({
-        userName:{
-            type : String,
-            required : true,
-            unique : true,
-            ref : 'users',
+  "carts",
+  new mongoose.Schema({
+    userName: {
+      type: String,
+      required: true,
+      unique: true,
+      ref: "users",
+    },
+    items: [
+      {
+        productId: {
+          type: Number,
+          ref: "products",
         },
-        items:[
-            {
-                productId:{
-                    type: Number,
-                    ref: 'products',
-                },
-                quantity:{
-                    type: Number,
-                    required : true,
-                }
-            }
-        ],
-        totalPrice:{
-            type: Number,
-            required:true,
-        }
-    }).plugin(autoIncrement.plugin, { model: 'carts', field: 'cartId', startAt: 111000})
+        quantity: {
+          type: Number,
+          required: true,
+        },
+        size: {
+          type: String,
+          required: true,
+          trim: true,
+        },
+      },
+    ],
+    totalPrice: {
+      type: Number,
+    },
+  }).plugin(autoIncrement.plugin, {
+    model: "carts",
+    field: "cartId",
+    startAt: 111000,
+  })
 );
 
-async function createIndexes(){
-    await CartModel.createIndexes( {'activeStatus': 1},{'userName' : 1}, {'cartId': 1 })
+async function createIndexes() {
+  await CartModel.createIndexes(
+    { activeStatus: 1 },
+    { userName: 1 },
+    { cartId: 1 }
+  );
 }
-// createIndexes(); 
+// createIndexes();
 
-module.exports = CartModel
+module.exports = CartModel;

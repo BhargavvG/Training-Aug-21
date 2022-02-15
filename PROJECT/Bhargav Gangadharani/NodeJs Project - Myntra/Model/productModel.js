@@ -1,15 +1,6 @@
 const mongoose = require("mongoose");
 const Joi = require("joi");
-const autoIncrement = require('mongoose-auto-increment');
-require('dotenv').config();
-
-mongoose.connect(process.env.DB, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true
-}).then(() => {
-    // console.log("MongoDB Connected...");
-});
-
+const autoIncrement = require("mongoose-auto-increment");
 autoIncrement.initialize(mongoose.connection);
 
 // model
@@ -59,11 +50,25 @@ const ProductModel = mongoose.model(
       ref: "users",
       required: true,
     },
-    stock: {
-      type: Number,
-      required: true,
+    gender: {
+      type: String,
       trim: true,
     },
+    color: {
+      type: String,
+      trim: true,
+    },
+    img: {
+      type: Array,
+      required: true,
+    },
+    sizes: [{ size: String, stock: Number, measurement: String }],
+    specifications: [{ title: String, value: String }],
+    description: {
+      type: String,
+      trim: true,
+    },
+    features: [],
     activeStatus: {
       type: Boolean,
       default: true,
@@ -75,10 +80,14 @@ const ProductModel = mongoose.model(
   })
 );
 
-
-async function createIndexes(){
-    await ProductModel.createIndexes( {'activeStatus': 1}, {'ProductId': 1 }, {'brand' : 1}, {'category' : 1})
+async function createIndexes() {
+  await ProductModel.createIndexes(
+    { activeStatus: 1 },
+    { ProductId: 1 },
+    { brand: 1 },
+    { category: 1 }
+  );
 }
 // createIndexes();
 
-module.exports = ProductModel
+module.exports = ProductModel;

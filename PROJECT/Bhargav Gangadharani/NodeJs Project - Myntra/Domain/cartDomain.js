@@ -171,7 +171,7 @@ class CartDomain {
     try {
       const cart = await CartModel.findOne({ userName: req.decoded.userName });
       const cartItems = [];
-      let status = false;
+      let status = true;
       if (cart.items.length > 0) {
         let totalPrice = 0;
         for (let i in cart.items) {
@@ -179,8 +179,9 @@ class CartDomain {
             productId: cart.items[i].productId,
           });
           let size = product.sizes.find((s) => s.size == cart.items[i].size);
-          if (size.stock < cart.items[i].quantity) status = false;
-          else status = true;
+          if (size.stock < cart.items[i].quantity) {
+            status = false;
+          }
           cartItems[i] = {
             productId: cart.items[i].productId,
             quantity: cart.items[i].quantity,
@@ -249,12 +250,12 @@ async function sendOrder(order) {
     }
     async function stock() {
       let result = await ProductModel.updateOne(
-        { productId: item.productId },
-        { $inc: { stock: -parseInt(item.quantity) } }
+        { productId: item.productId, "sizes.size": item.size },
+        { $inc: { "sizes.$.stock": -parseInt(item.quantity) } }
       );
     }
     storedata();
-    // stock();
+    stock();
   }
 }
 
